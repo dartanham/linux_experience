@@ -1,0 +1,41 @@
+#!/bin/bash
+
+echo "Criando diretórios..."
+
+mkdir /publico
+mkdir /adm
+mkdir /ven
+mkdir /sec
+
+echo "Criando grupos de usuários..."
+
+groupadd GP_ADM
+groupadd GP_VEN
+groupadd GP_SEC
+
+echo "Criando usuários..."
+
+useradd ana -m -s /bin/bash -p $(openssl passwd -crypt Senha123) -G GP_ADM
+useradd josé -m -s /bin/bash -p $(openssl passwd -crypt Senha123) -G GP_ADM
+useradd juca -m -s /bin/bash -p $(openssl passwd -crypt Senha123) -G GP_ADM
+
+useradd denise -m -s /bin/bash -p $(openssl passwd -crypt Senha123) -G GP_VEN
+useradd cleo -m -s /bin/bash -p $(openssl passwd -crypt Senha123) -G GP_VEN
+useradd robson -m -s /bin/bash -p $(openssl passwd -crypt Senha123) -G GP_VEN
+
+useradd rael -m -s /bin/bash -p $(openssl passwd -crypt Senha123) -G GRP_SC
+useradd anderson -m -s /bin/bash -p $(openssl passwd -crypt Senha123) -G GP_SEC
+useradd roger -m -s /bin/bash -p $(openssl passwd -crypt Senha123) -G GP_SEC
+
+echo "Especificando permissões dos diretórios...."
+
+chown root:GRP_ADM /adm
+chown root:GRP_VEN /ven
+chown root:GRP_SEC /sec
+
+chmod 770 /adm
+chmod 770 /ven
+chmod 770 /sec
+chmod 777 /publico
+
+echo "Fim....."
